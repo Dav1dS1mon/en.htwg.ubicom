@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ubicomlogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:minHeight="50dp"
+        android:minWidth="400dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="University:"
+        android:id="@+id/textView_uni"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="20dp"
+        android:layout_alignRight="@+id/text_course"
+        android:layout_alignEnd="@+id/text_course"
+        android:layout_alignLeft="@+id/text_prof"
+        android:layout_alignStart="@+id/text_prof" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/okButton"
+        android:minWidth="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/htwglogo"
+        android:layout_below="@+id/textView_uni"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Professor:"
+        android:id="@+id/text_prof"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Prof. Dr. Seepold"
+        android:id="@+id/text_profName"
+        android:layout_alignTop="@+id/text_prof"
+        android:layout_toRightOf="@+id/okButton"
+        android:layout_toEndOf="@+id/okButton"
+        android:layout_marginLeft="-70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Author:"
+        android:id="@+id/text_author"
+        android:layout_below="@+id/text_prof"
+        android:layout_alignLeft="@+id/text_prof"
+        android:layout_alignStart="@+id/text_prof" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="David Simon"
+        android:id="@+id/text_authorName"
+        android:layout_below="@+id/text_profName"
+        android:layout_alignLeft="@+id/text_profName"
+        android:layout_alignStart="@+id/text_profName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Degree Course:"
+        android:id="@+id/text_course"
+        android:layout_below="@+id/text_author"
+        android:layout_alignLeft="@+id/text_author"
+        android:layout_alignStart="@+id/text_author" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="AIN"
+        android:id="@+id/text_degreeName"
+        android:layout_below="@+id/text_authorName"
+        android:layout_alignLeft="@+id/text_authorName"
+        android:layout_alignStart="@+id/text_authorName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Semester:"
+        android:id="@+id/text_semester"
+        android:layout_below="@+id/text_course"
+        android:layout_alignLeft="@+id/text_course"
+        android:layout_alignStart="@+id/text_course" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="6"
+        android:id="@+id/text_semesterNumber"
+        android:layout_alignTop="@+id/text_semester"
+        android:layout_alignLeft="@+id/text_degreeName"
+        android:layout_alignStart="@+id/text_degreeName" />
+
+</RelativeLayout>

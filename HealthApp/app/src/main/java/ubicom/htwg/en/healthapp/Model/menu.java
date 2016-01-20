@@ -14,8 +14,15 @@ import android.widget.Toast;
 import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.R;
 
+/*
+ * @Author:         David Simon
+ * @Semester:       WS2015/2016
+ * @Professor:      Professor Doctor Seepold
+ * @Description:    Main activity - Menu with all option for the user.
+ */
 public class menu extends AppCompatActivity {
 
+    // Buttons from the menu
     private Button startMeasurmentButton;
     private Button stopMeasurmentButton;
     private Button viewMeasurmentButton;
@@ -23,6 +30,10 @@ public class menu extends AppCompatActivity {
     private Button infoButton;
     private Button closeButton;
 
+    /*
+     * @Description:         Init menu with all buttons with action and toast.
+     * @Parameter:           TODO: savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +145,11 @@ public class menu extends AppCompatActivity {
                                                });
     }
 
+    /*
+     * @Description:    Init menu options
+     * @Parameter:      Menu-Variable
+     * @Return:         Boolean Variable - true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -141,6 +157,11 @@ public class menu extends AppCompatActivity {
         return true;
     }
 
+    /*
+     * @Description:    Option Item
+     * @Param:          MenuItem
+     * @Return:         Boolean - If select option goes right
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

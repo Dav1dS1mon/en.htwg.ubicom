@@ -20,6 +20,7 @@ import java.util.List;
 import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.R;
 
+//TODO: Change Map Activity - Merge with Bioharness3
 public class map extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

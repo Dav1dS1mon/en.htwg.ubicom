@@ -15,16 +15,31 @@ import java.util.List;
 
 import ubicom.htwg.en.healthapp.R;
 
+/*
+ * @Author:         David Simon
+ * @Semester:       WS2015/2016
+ * @Professor:      Professor Doctor Seepold
+ * @Description:    Connect with GPS Tracker from smartphone and create a route.
+ */
 public class Recorder extends Service implements LocationListener {
+    //Variable
     public static List<Location> coordinates = new ArrayList<Location>();
     private LocationManager locationManager;
 
+    /*
+     * @Description:    Override method from LocationListener
+     * @Intent:         Intent-Variable
+     * @Return:         Null
+     */
     @Override
     public IBinder onBind(Intent intent)
     {
         return null;
     }
 
+    /*
+     * @Description: Init the GPS Tracker.
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,28 +48,44 @@ public class Recorder extends Service implements LocationListener {
         coordinates.clear();
     }
 
+    /*
+     * @Description: Remove GPS Trakcer service
+     */
     @Override
     public void onDestroy() {
         locationManager.removeUpdates(this);
         super.onDestroy();
     }
 
+    /*
+     * @Description:    Update Location - If Location changed
+     * @Location:       Current Location
+     */
     @Override
     public void onLocationChanged(Location location) {
         coordinates.add(location);
         System.err.println("DEBUG - Location: Coordinates: Latiude: " + location.getLatitude() + "|| Longitude: " + location.getLongitude());
     }
 
+    /*
+     * @Description:    Override methods from LocationListener
+     */
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
     }
 
+    /*
+     * @Description:    Override methods from LocationListener
+     */
     @Override
     public void onProviderEnabled(String provider) {
 
     }
 
+    /*
+     * @Description:    Override methods from LocationListener
+     */
     @Override
     public void onProviderDisabled(String provider) {
 

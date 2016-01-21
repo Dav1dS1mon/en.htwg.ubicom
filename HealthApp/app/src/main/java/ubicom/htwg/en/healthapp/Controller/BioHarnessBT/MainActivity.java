@@ -2,11 +2,12 @@ package ubicom.htwg.en.healthapp.Controller.BioHarnessBT;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-//import android.R.*;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.*;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
+import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.R;
 
 public class MainActivity extends Activity {
@@ -36,94 +38,72 @@ public class MainActivity extends Activity {
 	BTClient _bt;
 	ZephyrProtocol _protocol;
 	ConnectedListener<BTClient> _listener;
-	
-    /** Called when the activity is first created. */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        /*Sending a message to android that we are going to initiate a pairing request*/
+
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
-        /*Registering a new BTBroadcast receiver from the Main Activity context with pairing request event*/
         this.getApplicationContext().registerReceiver(new BTBroadcastReceiver(), filter);
-        // Registering the BTBondReceiver in the application that the status of the receiver has changed to Paired
         IntentFilter filter2 = new IntentFilter("android.bluetooth.device.action.BOND_STATE_CHANGED");
         this.getApplicationContext().registerReceiver(new BTBondReceiver(), filter2);
-        //Obtaining the handle to modify the text size of text coming from the GP information
-        TextView tv = (TextView) findViewById(R.id.genText);
-        //Setting the text size for GP data
-        tv.setTextSize(TextSize);
-      //Obtaining the handle to modify the text size of text coming from the ECG information
-        tv = (TextView) findViewById(R.id.ecgText);
-      //Setting the text size for ECG data
-        tv.setTextSize(TextSize);
-        
-      //Obtaining the handle to modify the text size of text coming from the Breathing Packet information
-      //Setting the text size for Breathing data
-        tv = (TextView) findViewById(R.id.breathText);
-        tv.setTextSize(TextSize);
-        
-        //Obtaining the handle to modify the text size of text coming from the Breathing Packet information
-        //Setting the text size for Breathing data
-          tv = (TextView) findViewById(R.id.Accelerometertext);
-          tv.setTextSize(TextSize);
-        
-        //Obtaining the handle to modify the text size of text coming from the Breathing Packet information
-        //Setting the text size for R to R data
-          tv = (TextView) findViewById(R.id.RtoRText);
-          tv.setTextSize(TextSize);
-      //Obtaining the handle to act on the CONNECT button
+
         Button btnConnect = (Button) findViewById(R.id.ButtonConnect);
         if (btnConnect != null)
         	btnConnect.setOnClickListener(new OnClickListener() {
 				@Override
 				//Functionality to act if the button CONNECT is touched
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					/*Obtain a handle to the default bluetooth adaptor for communication*/
 					adapter = BluetoothAdapter.getDefaultAdapter();
-					/*Obtaining the Bluetooth MAC information from the screen of the phone*/
 					EditText mac = (EditText) findViewById(R.id.EditTextMAC);
-					/*Create a new thread called to manage BT communications
-					/called BTClient using the information entered in the textbox */
 					_bt = new BTClient(adapter, mac.getText().toString());
-					/*Instantiates a new object implementing the connected Listener interface and
-					/passes it the handler object*/
 					_listener = new ConnectListenerImpl(handler,DataBytes);
-				
-					/*Adds the ConnectListenerImpl to the BTClients eventsubscriber list to respond to OnConnected() method*/
 					_bt.addConnectedEventListener(_listener);
-					/*Kick off the thread to launch its activity*/
 					if(_bt.IsConnected())
 					{
+						System.err.println("INFO: Connect to BioHarness");
 						_bt.start();
 					}
 					else
 					{
-						 TextView tv = (TextView) findViewById(R.id.genText);
-						 String ErrorText  = "Unable to connect to BioHarness !";
-						 tv.setText(ErrorText);
+						String ErrorText  = "ERROR: Unable to connect to BioHarness !";
+
+						AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+						builder.setTitle("Info");
+						builder.setMessage("Unable to connect to BioHarness!");
+						builder.setPositiveButton("Ok",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int which) {
+										//dismiss the dialog
+									}
+								});
+						AlertDialog alert = builder.create();
+						alert.show();
+
+						System.err.println(ErrorText);
 					}
 				}
         	});
-      /*Obtaining the handle to act on the DISCONNECT button*/
         Button btnDisconnect = (Button) findViewById(R.id.ButtonDisconnect);
         if (btnDisconnect != null)
         	btnDisconnect.setOnClickListener(new OnClickListener() {
 				@Override
 				/*Functionality to act if the button DISCONNECT is touched*/
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					/*Reset the global variables*/
-					
-					/*This disconnects listener from acting on received messages*/	
-					_bt.removeConnectedEventListener(_listener);
-					/*Close the communication with the device & throw an exception if failure*/
-					_bt.Close();
-				
+
+					System.err.println("INFO: Disconnected to BioHarness");
+					try {
+						_bt.removeConnectedEventListener(_listener);
+						_bt.Close();
+						finish();
+					} catch (Exception e) {
+						finish();
+					}
 				}
         	});
     }
+
     private class BTBondReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -148,19 +128,14 @@ public class MainActivity extends Activity {
 				Object result = m.invoke(device, pin);
 				Log.d("BTTest", result.toString());
 			} catch (SecurityException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (NoSuchMethodException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -171,44 +146,52 @@ public class MainActivity extends Activity {
     		switch (msg.what)
     		{
     		case GEN_PACKET:
-    		String genText = msg.getData().getString("genText");
-    		tv = (TextView)findViewById(R.id.genText);
-    		if (tv != null) tv.setText(genText);
-    		break;
+				String genText = msg.getData().getString("genText");
+				System.err.println("Information: " + genText);
+				EditText info = (EditText) findViewById(R.id.info_ed);
+				info.setText(genText);
+				break;
     		case ECG_PACKET:
-    		String ecgText = msg.getData().getString("ecgText");
-    		tv = (TextView)findViewById(R.id.ecgText);
-    		if (tv != null) tv.setText(ecgText);
-    		break;
+				String ecgText = msg.getData().getString("ecgText");
+				System.err.println("ECG: " + ecgText);
+				EditText ecg = (EditText) findViewById(R.id.ecg_info);
+				ecg.setText(ecgText);
+				break;
     		case BREATH_PACKET:
         		String breathText = msg.getData().getString("breathText");
-        		tv = (TextView)findViewById(R.id.breathText);
-        		if (tv != null) tv.setText(breathText);
+        		System.err.println("Breath: " + breathText);
+				EditText breath = (EditText) findViewById(R.id.breath_ed);
+				breath.setText(breathText);
         		break;
     		case R_to_R_PACKET:
         		String RtoRText = msg.getData().getString("RtoRText");
-        		tv = (TextView)findViewById(R.id.RtoRText);
-        		if (tv != null) tv.setText(RtoRText);
+        		System.err.println("R2R: " + RtoRText);
+				EditText rtor = (EditText) findViewById(R.id.rtor_ed);
+				rtor.setText(RtoRText);
         		break;
     		case ACCELEROMETER_PACKET:
         		String AccelerometerText = msg.getData().getString("Accelerometertext");
-        		tv = (TextView)findViewById(R.id.Accelerometertext);
-        		if (tv != null) tv.setText(AccelerometerText);
+        		System.err.println("Accelerometer: " + AccelerometerText);
+				EditText accel = (EditText) findViewById(R.id.accel_ed);
+				accel.setText(AccelerometerText);
     			break;
     		case SERIAL_NUM_PACKET:
     			String SerialNumtext = msg.getData().getString("SerialNumtxt");
-    			tv = (EditText)findViewById(R.id.labelSerialNumber);
-    			if (tv != null)tv.setText(SerialNumtext);
+				EditText serial = (EditText) findViewById(R.id.labelSerialNumber);
+				serial.setText(SerialNumtext);
+    			System.err.println("Serialnumber: " + SerialNumtext);
     			break;
     		case SUMMARY_DATA_PACKET:
         		String SummaryText = msg.getData().getString("SummaryDataText");
-        		tv = (TextView)findViewById(R.id.SummaryDataText);
-        		if (tv != null) tv.setText(SummaryText);
+        		System.err.println("Summary: " + SummaryText);
+				EditText summary = (EditText) findViewById(R.id.summary_ed);
+				summary.setText(SummaryText);
     			break;
     		case EVENT_DATA_PACKET:
         		String EventText = msg.getData().getString("EventDataText");
-        		tv = (TextView)findViewById(R.id.EventDataText);
-        		if (tv != null) tv.setText(EventText);
+        		System.err.println("Event: " + EventText);
+				EditText eventText = (EditText) findViewById(R.id.event_ed);
+				eventText.setText(EventText);
     			break;
     		}
     	}

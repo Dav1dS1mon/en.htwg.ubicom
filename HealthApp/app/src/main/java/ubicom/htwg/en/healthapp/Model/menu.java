@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import ubicom.htwg.en.healthapp.Controller.BioHarnessBT.MainActivity;
 import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.R;
 
@@ -25,9 +26,7 @@ public class menu extends AppCompatActivity {
 
     // Buttons from the menu
     private Button startMeasurmentButton;
-    private Button stopMeasurmentButton;
     private Button viewMeasurmentButton;
-    private Button personalButton;
     private Button infoButton;
     private Button closeButton;
 
@@ -39,6 +38,7 @@ public class menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        final MainActivity bioHarnessSensor = new MainActivity();
 
         startMeasurmentButton = (Button)findViewById(R.id.start_button);
         startMeasurmentButton.setOnClickListener(new
@@ -47,27 +47,13 @@ public class menu extends AppCompatActivity {
                                                              public void onClick(View v) {
                                                                  Toast.makeText(menu.this, "INFO: Bioharness 3 - PIN 1234",
                                                                          Toast.LENGTH_LONG).show();
+
                                                                  startService(new Intent(menu.this, Recorder.class));
                                                                  startMeasurmentButton.setEnabled(false);
-                                                                 stopMeasurmentButton.setEnabled(true);
-                                                                 viewMeasurmentButton.setEnabled(false);
-                                                                 //TODO: Start Measurment
+                                                                 viewMeasurmentButton.setEnabled(true);
+                                                                 startActivity(new Intent(menu.this, MainActivity.class));
                                                              }
                                                          });
-
-        stopMeasurmentButton = (Button)findViewById(R.id.stop_button);
-        stopMeasurmentButton.setOnClickListener(new
-                                                        View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v)
-                                                            {
-                                                                startMeasurmentButton.setEnabled(true);
-                                                                stopMeasurmentButton.setEnabled(false);
-                                                                viewMeasurmentButton.setEnabled(true);
-                                                                //TODO: Stop Measurment
-                                                                stopService(new Intent(menu.this, Recorder.class));
-                                                            }
-                                                        });
 
 
         viewMeasurmentButton = (Button)findViewById(R.id.result_button);
@@ -77,19 +63,11 @@ public class menu extends AppCompatActivity {
                                                             public void onClick(View v)
                                                             {
                                                                 //TODO: Show Result from Measurment with Tracker and Bioharness3
+                                                                stopService(new Intent(menu.this, Recorder.class));
                                                                 startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.map.class));
+                                                                startMeasurmentButton.setEnabled(true);
                                                             }
                                                         });
-
-        personalButton = (Button)findViewById(R.id.person_button);
-        personalButton.setOnClickListener(new
-                                                  View.OnClickListener() {
-                                                      @Override
-                                                      public void onClick(View v)
-                                                      {
-                                                          startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.Controller.BioHarnessBT.MainActivity.class));
-                                                      }
-                                                  });
 
         infoButton = (Button)findViewById(R.id.info_button);
         infoButton.setOnClickListener(new

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.R;
 
+
 /*
  * @Author:         David Simon
  * @Semester:       WS2015/2016
@@ -44,15 +45,13 @@ public class menu extends AppCompatActivity {
                                                          View.OnClickListener() {
                                                              @Override
                                                              public void onClick(View v) {
-                                                                 Toast.makeText(menu.this, "INFO: Start measurment",
+                                                                 Toast.makeText(menu.this, "INFO: Bioharness 3 - PIN 1234",
                                                                          Toast.LENGTH_LONG).show();
+                                                                 startService(new Intent(menu.this, Recorder.class));
                                                                  startMeasurmentButton.setEnabled(false);
                                                                  stopMeasurmentButton.setEnabled(true);
                                                                  viewMeasurmentButton.setEnabled(false);
-
                                                                  //TODO: Start Measurment
-                                                                 startService(new Intent(menu.this, Recorder.class));
-
                                                              }
                                                          });
 
@@ -62,8 +61,6 @@ public class menu extends AppCompatActivity {
                                                             @Override
                                                             public void onClick(View v)
                                                             {
-                                                                Toast.makeText(menu.this, "INFO: Stop measurment",
-                                                                        Toast.LENGTH_LONG).show();
                                                                 startMeasurmentButton.setEnabled(true);
                                                                 stopMeasurmentButton.setEnabled(false);
                                                                 viewMeasurmentButton.setEnabled(true);
@@ -79,9 +76,6 @@ public class menu extends AppCompatActivity {
                                                             @Override
                                                             public void onClick(View v)
                                                             {
-                                                                Toast.makeText(menu.this, "INFO: Show result",
-                                                                        Toast.LENGTH_LONG).show();
-
                                                                 //TODO: Show Result from Measurment with Tracker and Bioharness3
                                                                 startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.map.class));
                                                             }
@@ -91,10 +85,9 @@ public class menu extends AppCompatActivity {
         personalButton.setOnClickListener(new
                                                   View.OnClickListener() {
                                                       @Override
-                                                      public void onClick(View v) {
-                                                          Toast.makeText(menu.this, "INFO: Personal settings",
-                                                                  Toast.LENGTH_LONG).show();
-                                                          //TODO: Bioharness3 Settings
+                                                      public void onClick(View v)
+                                                      {
+                                                          startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.Controller.BioHarnessBT.MainActivity.class));
                                                       }
                                                   });
 
@@ -104,8 +97,6 @@ public class menu extends AppCompatActivity {
                                                   @Override
                                                   public void onClick(View v)
                                                   {
-                                                      Toast.makeText(menu.this, "INFO: Show information",
-                                                              Toast.LENGTH_LONG).show();
                                                       startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.information.class));
                                                   }
                                               });

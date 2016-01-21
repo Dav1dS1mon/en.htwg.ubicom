@@ -37,7 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.information" />
-        <activity android:name=".Controller.BioharnessSensor" />
+        <activity android:name=".View.setting" />
+        <activity android:name=".Controller.BioHarnessBT.MainActivity"/>
         <activity
             android:name=".View.map"
             android:label="@string/title_activity_map" />

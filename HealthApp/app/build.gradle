@@ -25,6 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services:8.4.0'
-    compile files('src/main/java/ubicom/htwg/en/healthapp/libs/bioharness.jar')
     compile files('src/main/java/ubicom/htwg/en/healthapp/libs/mapsforge.jar')
+    compile files('src/main/java/ubicom/htwg/en/healthapp/libs/BioHarnessBT.jar')
 }

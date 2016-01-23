@@ -9,11 +9,12 @@
     <EditText android:text="E0:D7:BA:A7:B2:DE" android:id="@+id/EditTextMAC" android:layout_width="wrap_content" android:layout_height="wrap_content"></EditText>
      -->
 
-    <EditText android:text="E0:D7:BA:A7:B2:DE" android:id="@+id/EditTextMAC" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <EditText android:text="00:17:E9:C0:84:03" android:id="@+id/EditTextMAC" android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/sensorHeader_tv"
-        android:layout_toRightOf="@+id/accelerometer_text"
-        android:layout_toEndOf="@+id/accelerometer_text"></EditText>
+        android:layout_toRightOf="@+id/temperature_text"
+        android:layout_toEndOf="@+id/temperature_text"
+        android:enabled="false"></EditText>
 
     <EditText android:text="0000000000000000"
         android:id="@+id/labelSerialNumber"
@@ -71,8 +72,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Information:"
-        android:id="@+id/info_text"
+        android:text="Heart Rate"
+        android:id="@+id/heart_text"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/ButtonConnect"
         android:layout_alignLeft="@+id/serialNumber_tv"
@@ -82,133 +83,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ECG:"
-        android:id="@+id/ecg_text"
-        android:layout_below="@+id/info_text"
+        android:text="Respiratory: "
+        android:id="@+id/resp_text"
+        android:layout_below="@+id/heart_text"
         android:layout_alignLeft="@+id/serialNumber_tv" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Breath:"
-        android:id="@+id/breath_text"
-        android:layout_below="@+id/ecg_text"
+        android:text="Accelerometry"
+        android:id="@+id/run_text"
+        android:layout_below="@+id/resp_text"
         android:layout_alignLeft="@+id/serialNumber_tv" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="R2R:"
-        android:id="@+id/rtor_text"
-        android:layout_below="@+id/breath_text"
+        android:text="Posture:"
+        android:id="@+id/posture_text"
+        android:layout_below="@+id/run_text"
         android:layout_alignLeft="@+id/serialNumber_tv" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Accelerometer:"
-        android:id="@+id/accelerometer_text"
-        android:layout_below="@+id/rtor_text"
+        android:text="Temperature:"
+        android:id="@+id/temperature_text"
+        android:layout_below="@+id/posture_text"
         android:layout_alignLeft="@+id/serialNumber_tv" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Summary:"
-        android:id="@+id/summary_text"
-        android:layout_below="@+id/accel_ed"
-        android:layout_alignLeft="@+id/accel_ed"
-        android:layout_alignStart="@+id/accel_ed" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event:"
-        android:id="@+id/event_text"
-        android:layout_below="@+id/summary_text"
-        android:layout_alignLeft="@+id/summary_text"
-        android:layout_alignStart="@+id/summary_text" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/info_ed"
-        android:layout_alignBottom="@+id/info_text"
+        android:id="@+id/heart_ed"
+        android:layout_alignBottom="@+id/heart_text"
         android:layout_alignRight="@+id/labelSerialNumber"
         android:layout_alignEnd="@+id/labelSerialNumber"
-        android:layout_alignLeft="@+id/EditTextMAC"
-        android:layout_alignStart="@+id/EditTextMAC"
+        android:enabled="false"
+        android:layout_alignLeft="@+id/ButtonDisconnect"
+        android:layout_alignStart="@+id/ButtonDisconnect" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/breath_info"
+        android:layout_above="@+id/run_text"
+        android:layout_alignRight="@+id/heart_ed"
+        android:layout_alignEnd="@+id/heart_ed"
+        android:layout_alignLeft="@+id/heart_ed"
+        android:layout_alignStart="@+id/heart_ed"
         android:enabled="false" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ecg_info"
-        android:layout_above="@+id/breath_text"
-        android:layout_alignRight="@+id/info_ed"
-        android:layout_alignEnd="@+id/info_ed"
-        android:layout_alignLeft="@+id/info_ed"
-        android:layout_alignStart="@+id/info_ed"
+        android:id="@+id/run_ed"
+        android:layout_alignBottom="@+id/run_text"
+        android:layout_alignRight="@+id/breath_info"
+        android:layout_alignEnd="@+id/breath_info"
+        android:layout_alignLeft="@+id/breath_info"
+        android:layout_alignStart="@+id/breath_info"
         android:enabled="false" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/breath_ed"
-        android:layout_alignBottom="@+id/breath_text"
-        android:layout_alignRight="@+id/ecg_info"
-        android:layout_alignEnd="@+id/ecg_info"
-        android:layout_alignLeft="@+id/ecg_info"
-        android:layout_alignStart="@+id/ecg_info"
+        android:id="@+id/posture_ed"
+        android:layout_above="@+id/temperature_text"
+        android:layout_alignRight="@+id/run_ed"
+        android:layout_alignEnd="@+id/run_ed"
+        android:layout_alignLeft="@+id/run_ed"
+        android:layout_alignStart="@+id/run_ed"
         android:enabled="false" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rtor_ed"
-        android:layout_above="@+id/accelerometer_text"
-        android:layout_alignRight="@+id/breath_ed"
-        android:layout_alignEnd="@+id/breath_ed"
-        android:layout_alignLeft="@+id/breath_ed"
-        android:layout_alignStart="@+id/breath_ed"
-        android:enabled="false" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/accel_ed"
-        android:layout_below="@+id/accelerometer_text"
-        android:layout_alignRight="@+id/EditTextMAC"
-        android:layout_alignEnd="@+id/EditTextMAC"
-        android:layout_alignLeft="@+id/accelerometer_text"
-        android:layout_alignStart="@+id/accelerometer_text"
-        android:enabled="false" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/summary_ed"
-        android:layout_above="@+id/event_text"
-        android:layout_alignLeft="@+id/rtor_ed"
-        android:layout_alignStart="@+id/rtor_ed"
-        android:layout_alignRight="@+id/rtor_ed"
-        android:layout_alignEnd="@+id/rtor_ed"
-        android:enabled="false" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/event_ed"
-        android:layout_alignBottom="@+id/event_text"
-        android:layout_alignLeft="@+id/summary_ed"
-        android:layout_alignStart="@+id/summary_ed"
-        android:layout_alignRight="@+id/summary_ed"
-        android:layout_alignEnd="@+id/summary_ed"
-        android:enabled="false" />
+        android:id="@+id/temperature_ed"
+        android:enabled="false"
+        android:layout_alignBottom="@+id/temperature_text"
+        android:layout_alignLeft="@+id/posture_ed"
+        android:layout_alignStart="@+id/posture_ed"
+        android:layout_alignRight="@+id/labelSerialNumber"
+        android:layout_alignEnd="@+id/labelSerialNumber" />
 
 </RelativeLayout>

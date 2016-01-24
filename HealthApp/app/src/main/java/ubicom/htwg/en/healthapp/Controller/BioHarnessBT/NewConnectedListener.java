@@ -1,3 +1,8 @@
+/*
+ * Source: http://www.verydemo.com/demo_c89_i35191.html
+ * Date: 23.01.2016, 18:07
+ */
+
 package ubicom.htwg.en.healthapp.Controller.BioHarnessBT;
 
 import android.app.Activity;

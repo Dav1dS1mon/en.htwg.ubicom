@@ -27,4 +27,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile files('src/main/java/ubicom/htwg/en/healthapp/libs/mapsforge.jar')
     compile files('src/main/java/ubicom/htwg/en/healthapp/libs/BioHarnessBT.jar')
+    compile files('src/main/java/ubicom/htwg/en/healthapp/libs/achartengine-1.2.0.jar')
 }

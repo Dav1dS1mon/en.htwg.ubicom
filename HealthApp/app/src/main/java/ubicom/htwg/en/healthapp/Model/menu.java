@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
@@ -27,8 +28,12 @@ public class menu extends AppCompatActivity {
     // Buttons from the menu
     private Button startMeasurmentButton;
     private Button viewMeasurmentButton;
+    private Button diagrammButton;
     private Button infoButton;
     private Button closeButton;
+    private long startTime;
+    public static long stopTime;
+    private static long diffTime;
 
     /*
      * @Description:         Init menu with all buttons with action and toast.
@@ -49,8 +54,10 @@ public class menu extends AppCompatActivity {
                                                                          Toast.LENGTH_LONG).show();
 
                                                                  startService(new Intent(menu.this, Recorder.class));
+                                                                 startTime = System.currentTimeMillis();
+
                                                                  startMeasurmentButton.setEnabled(false);
-                                                                 viewMeasurmentButton.setEnabled(true);
+                                                                 viewMeasurmentButton.setEnabled(true);                                                                 diagrammButton.setEnabled(true);
                                                                  startActivity(new Intent(menu.this, MainActivity.class));
                                                              }
                                                          });
@@ -62,9 +69,22 @@ public class menu extends AppCompatActivity {
                                                             @Override
                                                             public void onClick(View v)
                                                             {
-                                                                //TODO: Show Result from Measurment with Tracker and Bioharness3
                                                                 stopService(new Intent(menu.this, Recorder.class));
+                                                                diffTime = stopTime - startTime;
+
                                                                 startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.map.class));
+                                                                startMeasurmentButton.setEnabled(true);
+                                                            }
+                                                        });
+
+        diagrammButton = (Button)findViewById(R.id.button_diagramm);
+        diagrammButton.setOnClickListener(new
+                                                        View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v)
+                                                            {
+                                                                diffTime = stopTime - startTime;
+                                                                startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.diagramm.class));
                                                                 startMeasurmentButton.setEnabled(true);
                                                             }
                                                         });
@@ -144,5 +164,9 @@ public class menu extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static long getDiffTime() {
+        return diffTime;
     }
 }

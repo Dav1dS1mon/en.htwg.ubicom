@@ -10,11 +10,11 @@
      -->
 
     <EditText android:text="00:17:E9:C0:84:03" android:id="@+id/EditTextMAC" android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="47dp"
+        android:enabled="true"
         android:layout_below="@+id/sensorHeader_tv"
-        android:layout_toRightOf="@+id/temperature_text"
-        android:layout_toEndOf="@+id/temperature_text"
-        android:enabled="false"></EditText>
+        android:layout_alignLeft="@+id/labelSerialNumber"
+        android:layout_alignStart="@+id/labelSerialNumber"></EditText>
 
     <EditText android:text="0000000000000000"
         android:id="@+id/labelSerialNumber"
@@ -54,7 +54,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="MAC:"
         android:id="@+id/mac_tv"
-        android:layout_alignBottom="@+id/EditTextMAC"
+        android:layout_alignTop="@+id/EditTextMAC"
         android:layout_toLeftOf="@+id/sensorHeader_tv"
         android:layout_toStartOf="@+id/sensorHeader_tv" />
 
@@ -106,25 +106,16 @@
         android:layout_below="@+id/run_text"
         android:layout_alignLeft="@+id/serialNumber_tv" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Temperature:"
-        android:id="@+id/temperature_text"
-        android:layout_below="@+id/posture_text"
-        android:layout_alignLeft="@+id/serialNumber_tv" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/heart_ed"
         android:layout_alignBottom="@+id/heart_text"
-        android:layout_alignRight="@+id/labelSerialNumber"
-        android:layout_alignEnd="@+id/labelSerialNumber"
         android:enabled="false"
         android:layout_alignLeft="@+id/ButtonDisconnect"
-        android:layout_alignStart="@+id/ButtonDisconnect" />
+        android:layout_alignStart="@+id/ButtonDisconnect"
+        android:layout_toLeftOf="@+id/tv_bpm"
+        android:layout_toStartOf="@+id/tv_bpm" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -152,22 +143,87 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/posture_ed"
-        android:layout_above="@+id/temperature_text"
-        android:layout_alignRight="@+id/run_ed"
-        android:layout_alignEnd="@+id/run_ed"
+        android:enabled="false"
+        android:layout_alignBottom="@+id/posture_text"
         android:layout_alignLeft="@+id/run_ed"
         android:layout_alignStart="@+id/run_ed"
-        android:enabled="false" />
+        android:layout_toLeftOf="@+id/tv_g"
+        android:layout_toStartOf="@+id/tv_g" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="bpm"
+        android:id="@+id/tv_bpm"
+        android:layout_alignTop="@+id/heart_text"
+        android:layout_alignRight="@+id/labelSerialNumber"
+        android:layout_alignEnd="@+id/labelSerialNumber" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="bpm"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/tv_bpm"
+        android:layout_alignLeft="@+id/tv_bpm"
+        android:layout_alignStart="@+id/tv_bpm" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="g"
+        android:id="@+id/tv_g"
+        android:layout_alignBottom="@+id/run_ed"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="°"
+        android:id="@+id/tv_grad"
+        android:layout_alignBottom="@+id/posture_ed"
+        android:layout_alignLeft="@+id/tv_g"
+        android:layout_alignStart="@+id/tv_g" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Status:"
+        android:id="@+id/tv_status"
+        android:layout_below="@+id/posture_ed"
+        android:layout_alignLeft="@+id/posture_text"
+        android:layout_alignStart="@+id/posture_text" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/temperature_ed"
+        android:id="@+id/heart_status"
+        android:text="Heart"
         android:enabled="false"
-        android:layout_alignBottom="@+id/temperature_text"
+        android:gravity="center"
+        android:layout_below="@+id/tv_status"
+        android:layout_alignLeft="@+id/ButtonConnect"
+        android:layout_alignStart="@+id/ButtonConnect"
+        android:layout_toLeftOf="@+id/breath_status"
+        android:layout_toStartOf="@+id/breath_status" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/breath_status"
+        android:text="Breath"
+        android:enabled="false"
+        android:gravity="center"
+        android:layout_alignTop="@+id/heart_status"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
         android:layout_alignLeft="@+id/posture_ed"
-        android:layout_alignStart="@+id/posture_ed"
-        android:layout_alignRight="@+id/labelSerialNumber"
-        android:layout_alignEnd="@+id/labelSerialNumber" />
+        android:layout_alignStart="@+id/posture_ed" />
 
 </RelativeLayout>

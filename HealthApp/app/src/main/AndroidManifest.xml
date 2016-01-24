@@ -37,8 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.information" />
-        <activity android:name=".View.setting" />
-        <activity android:name=".Controller.BioHarnessBT.MainActivity"/>
+        <activity android:name=".Controller.BioHarnessBT.MainActivity" />
         <activity
             android:name=".View.map"
             android:label="@string/title_activity_map" />
@@ -52,6 +51,10 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity android:name=".View.diagramm" />
+        <activity android:name=".View.diagramm" >
+        </activity>
     </application>
 
 </manifest>

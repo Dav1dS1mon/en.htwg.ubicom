@@ -1,3 +1,25 @@
+/*
+ * Copyright (C) 2009, 2010 SC 4ViewSoft SRL
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * @Author:     David Simon
+ * @Semester:   WS2015/2016
+ * @Professor:  Professor Doctor Seepold
+ */
+
 package ubicom.htwg.en.healthapp.View;
 
 import android.app.Activity;
@@ -28,25 +50,32 @@ import ubicom.htwg.en.healthapp.Controller.Recorder;
 import ubicom.htwg.en.healthapp.Model.menu;
 import ubicom.htwg.en.healthapp.R;
 
+/*
+ * @Description:    The class creates a chart.
+ */
 public class diagramm extends Activity {
 
+    /*
+     * @Description:    Creates a line chart and  with time and the data of the Bioharness3 sensor.
+     *                  X-Axis: Time
+     *                  Y-Axis: Breath Rate and Heart Rate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagramm);
 
+        //Local variable
         long diffTime = menu.getDiffTime() / 1000;
         List<Location> coordinates = Recorder.coordinates;
         List<Bundle> data = MainActivity.data;
         GraphicalView mChart;
-
         int avg_time = data.size() / (int) diffTime;
-
         Integer[] heartrate = new Integer[(int) diffTime];
         Float[] breathrate = new Float[(int) diffTime];
-
         int counter = 0;
 
+        //Add data to an array
         for (int i = 0; i < diffTime; i = i + avg_time) {
             try {
                 heartrate[counter] = (Integer.parseInt(data.get(i).getString("HeartRate")));
@@ -63,8 +92,10 @@ public class diagramm extends Activity {
             counter++;
         }
 
+        //Local variable
         Integer[] time = new Integer[(int) diffTime];
 
+        //Add data of the Bioharness3 sensor to line chart.
         for (int i = 0; i < diffTime; i++) {
             time[i] = i;
         }
@@ -112,9 +143,8 @@ public class diagramm extends Activity {
         }
         multiRenderer.addSeriesRenderer(renderer_heart);
         multiRenderer.addSeriesRenderer(renderer_breath);
-
         mChart = ChartFactory.getCubeLineChartView(this, dataset, multiRenderer, 0.3f);
-        //mChart.setBackgroundColor(Color.BLACK);
+        //Add line chart to layout
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         layout.addView(mChart);
     }

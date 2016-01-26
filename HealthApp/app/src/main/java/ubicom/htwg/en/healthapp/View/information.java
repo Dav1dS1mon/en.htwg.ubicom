@@ -1,3 +1,10 @@
+/*
+ * @Author:         David Simon
+ * @Semester:       WS2015/2016
+ * @Professor:      Professor Doctor Seepold
+ * @Description:    Information Activity
+ */
+
 package ubicom.htwg.en.healthapp.View;
 
 import android.app.Activity;
@@ -10,10 +17,7 @@ import android.widget.Toast;
 import ubicom.htwg.en.healthapp.R;
 
 /*
- * @Author:         David Simon
- * @Semester:       WS2015/2016
- * @Professor:      Professor Doctor Seepold
- * @Description:    Information Activity
+ * Description:    Information class - Start activity with information
  */
 public class information extends Activity {
 
@@ -22,7 +26,7 @@ public class information extends Activity {
 
     /*
      * @Description:    Init Information activity
-     * @Param:          Bundle - TODO
+     * @Param:          Bundle savedInstanceState
      */
     @Override
     protected void onCreate(Bundle saveInstanceState) {

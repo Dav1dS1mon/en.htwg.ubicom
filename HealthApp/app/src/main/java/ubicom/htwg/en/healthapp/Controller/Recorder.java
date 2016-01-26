@@ -1,3 +1,9 @@
+/*
+ * @Author:         David Simon
+ * @Semester:       WS2015/2016
+ * @Professor:      Professor Doctor Seepold
+ * @Description:    Connect with GPS Tracker from smartphone and create a route.
+ */
 package ubicom.htwg.en.healthapp.Controller;
 
 import android.app.Service;
@@ -16,13 +22,10 @@ import java.util.List;
 import ubicom.htwg.en.healthapp.R;
 
 /*
- * @Author:         David Simon
- * @Semester:       WS2015/2016
- * @Professor:      Professor Doctor Seepold
- * @Description:    Connect with GPS Tracker from smartphone and create a route.
+ * @Description:    Service for the GPS Tracker
  */
 public class Recorder extends Service implements LocationListener {
-    //Variable
+    //Local variable
     public static List<Location> coordinates = new ArrayList<Location>();
     private LocationManager locationManager;
 
@@ -72,7 +75,7 @@ public class Recorder extends Service implements LocationListener {
      */
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        //Empty
     }
 
     /*
@@ -80,7 +83,7 @@ public class Recorder extends Service implements LocationListener {
      */
     @Override
     public void onProviderEnabled(String provider) {
-
+        //Empty
     }
 
     /*
@@ -88,6 +91,6 @@ public class Recorder extends Service implements LocationListener {
      */
     @Override
     public void onProviderDisabled(String provider) {
-
+        //Empty
     }
 }

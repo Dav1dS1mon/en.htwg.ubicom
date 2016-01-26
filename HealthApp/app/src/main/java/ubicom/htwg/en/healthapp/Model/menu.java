@@ -1,3 +1,9 @@
+/*
+ * @Author:         David Simon
+ * @Semester:       WS2015/2016
+ * @Professor:      Professor Doctor Seepold
+ * @Description:    Main activity - Menu with all option for the user.
+ */
 package ubicom.htwg.en.healthapp.Model;
 
 import android.app.AlertDialog;
@@ -18,10 +24,7 @@ import ubicom.htwg.en.healthapp.R;
 
 
 /*
- * @Author:         David Simon
- * @Semester:       WS2015/2016
- * @Professor:      Professor Doctor Seepold
- * @Description:    Main activity - Menu with all option for the user.
+ * @Description: Main activity with user options.
  */
 public class menu extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class menu extends AppCompatActivity {
 
     /*
      * @Description:         Init menu with all buttons with action and toast.
-     * @Parameter:           TODO: savedInstanceState
+     * @Parameter:           Bundle savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         final MainActivity bioHarnessSensor = new MainActivity();
 
+        //Button: Start measurement with Bioharness3 sensor and start GPS service
         startMeasurmentButton = (Button)findViewById(R.id.start_button);
         startMeasurmentButton.setOnClickListener(new
                                                          View.OnClickListener() {
@@ -62,7 +66,7 @@ public class menu extends AppCompatActivity {
                                                              }
                                                          });
 
-
+        //Button: Show route result in Google Map
         viewMeasurmentButton = (Button)findViewById(R.id.result_button);
         viewMeasurmentButton.setOnClickListener(new
                                                         View.OnClickListener() {
@@ -71,12 +75,12 @@ public class menu extends AppCompatActivity {
                                                             {
                                                                 stopService(new Intent(menu.this, Recorder.class));
                                                                 diffTime = stopTime - startTime;
-
                                                                 startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.map.class));
                                                                 startMeasurmentButton.setEnabled(true);
                                                             }
                                                         });
 
+        //Button: Show line chart with Bioharness3 sensor
         diagrammButton = (Button)findViewById(R.id.button_diagramm);
         diagrammButton.setOnClickListener(new
                                                         View.OnClickListener() {
@@ -89,6 +93,7 @@ public class menu extends AppCompatActivity {
                                                             }
                                                         });
 
+        //Button: Show information about the auhtor and university
         infoButton = (Button)findViewById(R.id.info_button);
         infoButton.setOnClickListener(new
                                               View.OnClickListener() {
@@ -98,7 +103,7 @@ public class menu extends AppCompatActivity {
                                                       startActivity(new Intent(menu.this, ubicom.htwg.en.healthapp.View.information.class));
                                                   }
                                               });
-
+        //Button: Close Application
         closeButton = (Button)findViewById(R.id.close_button);
         closeButton.setOnClickListener(new
                                                View.OnClickListener() {
@@ -166,6 +171,10 @@ public class menu extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+     * @Description:    Method to return the difference time for time measurement
+     * @Return:         Long diffTime - Difference time from measurement
+     */
     public static long getDiffTime() {
         return diffTime;
     }

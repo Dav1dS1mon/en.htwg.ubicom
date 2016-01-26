@@ -2,7 +2,6 @@
  * Author: 			David Simon
  * Sources: 		Android Example from Zephyr
  * 					http://www.verydemo.com/demo_c89_i35191.html
- * Date: 			23.01.2016, 18:11
  */
 package ubicom.htwg.en.healthapp.Controller.BioHarnessBT;
 
@@ -40,14 +39,11 @@ import ubicom.htwg.en.healthapp.Model.menu;
 import ubicom.htwg.en.healthapp.R;
 
 /*
- *
- *
+ * @Description: 	Activity for the connection with the Bioharness3 sensor
  */
 public class MainActivity extends Activity {
 
-	/*
-	 *
-	 */
+	// Local variable
 	public static List<Bundle> data = new ArrayList<Bundle>();
 	protected static final ConnectedListener<BTClient> NULL = null;
 	private final int HEART_RATE = 0x100;
@@ -63,24 +59,27 @@ public class MainActivity extends Activity {
 	NewConnectedListener _NConnListener;
 
 	/*
-	 *
-	 *
+	 * @Description: 	Button - Connect/Disconnect with the Bioharness3 sensor
+	 * @Parameter:		Bundle savedInstanceState
 	 */
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
 
+		//Locale Variable
 		final Button btnConnect = (Button) findViewById(R.id.ButtonConnect);
 		final Button btnDisconnect = (Button) findViewById(R.id.ButtonDisconnect);
 		btnDisconnect.setEnabled(true);
 		btnConnect.setEnabled(true);
 
+		//Register Receiver with filter
 		IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
 		this.getApplicationContext().registerReceiver(new BTBroadcastReceiver(), filter);
 		IntentFilter filter2 = new IntentFilter("android.bluetooth.device.action.BOND_STATE_CHANGED");
 		this.getApplicationContext().registerReceiver(new BTBondReceiver(), filter2);
 
+		//Button - Connect with Bioharness3
 		if (btnConnect != null) {
 			btnConnect.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -126,6 +125,7 @@ public class MainActivity extends Activity {
 			});
 		}
 
+		// Disconnected with Bioharness3 sensor
 		if (btnDisconnect != null) {
 			btnDisconnect.setOnClickListener(new OnClickListener() {
 				@Override
@@ -134,7 +134,6 @@ public class MainActivity extends Activity {
 					String ErrorText = "Disconnected from BioHarness!";
 					System.err.println(ErrorText);
 					Toast.makeText(MainActivity.this, ErrorText, Toast.LENGTH_LONG).show();
-
 					_bt.removeConnectedEventListener(_NConnListener);
 					_bt.Close();
 					menu.stopTime = System.currentTimeMillis();

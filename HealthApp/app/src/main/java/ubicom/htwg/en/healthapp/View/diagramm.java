@@ -40,7 +40,6 @@ public class diagramm extends Activity {
         List<Bundle> data = MainActivity.data;
         GraphicalView mChart;
 
-        int avg_route = data.size() / coordinates.size();
         int avg_time = data.size() / (int) diffTime;
 
         Integer[] heartrate = new Integer[(int) diffTime];
@@ -70,12 +69,13 @@ public class diagramm extends Activity {
             time[i] = i;
         }
 
-
         XYSeries series_heart = new XYSeries("Heartrate");
         XYSeries series_breath = new XYSeries("Breathrate");
-        for (int i = 0; i < avg_time; i++) {
-            series_heart.add(time[i], heartrate[i]);
-            series_breath.add(time[i], Integer.parseInt(breathrate[i].toString().substring(breathrate[i].toString().lastIndexOf(".") + 1)));
+        for (int i = 0; i < time.length; i++) {
+            if (heartrate[i] != null && breathrate[i] != null) {
+                series_heart.add(time[i], heartrate[i]);
+                series_breath.add(time[i], breathrate[i]);
+            }
         }
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         dataset.addSeries(series_heart);

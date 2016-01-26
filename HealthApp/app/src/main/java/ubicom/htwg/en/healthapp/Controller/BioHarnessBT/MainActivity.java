@@ -144,14 +144,14 @@ public class MainActivity extends Activity {
 	}
 
 	/*
-	 *
-	 *
+	 * @Description: Receiver class
 	 */
 	private class BTBondReceiver extends BroadcastReceiver {
 
 		/*
-		 *
-		 *
+		 * @Description: 	Receive - Get device
+		 * @Parameter:		Context context
+		 * 					Intent intent
 		 */
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -162,14 +162,14 @@ public class MainActivity extends Activity {
     }
 
 	/*
-	 *
-	 *
+	 * @Description: Receiver class
 	 */
     private class BTBroadcastReceiver extends BroadcastReceiver {
 
 		/*
-		 *
-		 *
+		 * @Description:	Recieve device with pin
+		 * @Parameter:		Context context
+		 * 					Intent intent
 		 */
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -199,8 +199,7 @@ public class MainActivity extends Activity {
     }
 
 	/*
-	 *
-	 *
+	 * Variable handler - Get messages from Bioharness and order to save list.
 	 */
     final Handler handler = new Handler() {
     	public void handleMessage(Message msg) {

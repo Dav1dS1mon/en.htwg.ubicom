@@ -3,6 +3,8 @@
  * @Semester:       WS2015/2016
  * @Professor:      Professor Doctor Seepold
  * @Description:    Connect with GPS Tracker from smartphone and create a route.
+ * @Sources:        "Android 4 - Apps entwickeln mit dem Android SDK" von Thomas Künneth
+ *                  - "Kapitel 9: Sensoren und GPS" - Page 227 - 248
  */
 package ubicom.htwg.en.healthapp.Controller;
 
